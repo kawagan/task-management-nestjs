@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
+import { Task } from './task.model';
 
 @Injectable()
 export class TasksService {
-    private tasks: any[] = [];
+  private tasks: Task[] = [];
 
-    createTask(task: any) {
-        this.tasks.push(task);
-    }
+  createTask(task: any) {
+    this.tasks.push(task);
+  }
 
-    getAllTasks() {
-        return this.tasks;
-    }
+  getAllTasks(): Task[] {
+    return this.tasks;
+  }
 }
