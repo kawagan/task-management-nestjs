@@ -50,6 +50,7 @@ export class TasksService {
   }
 
   deleteTask(id: string): void {
+    this.getTaskById(id); // Will throw if not found
     this.tasks = this.tasks.filter(task => task.id !== id);
   }
 
