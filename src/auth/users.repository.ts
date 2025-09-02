@@ -12,8 +12,8 @@ export class UsersRepository {
   ) {}
 
   async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    const { email, password } = authCredentialsDto;
-    const user = this.repository.create({ email, password });
+    const { username, password } = authCredentialsDto;
+    const user = this.repository.create({ username, password });
     await this.repository.save(user);
   }
 }
