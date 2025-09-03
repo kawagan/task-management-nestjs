@@ -34,6 +34,10 @@ export class UsersRepository {
     await this.repository.save(user);
   }
 
+  async findByUsername(username: string): Promise<User | null> {
+    return this.repository.findOne({ where: { username } });
+  }
+
   async signin(authCredentialsDto: AuthCredentialsDto): Promise<AuthResponse> {
     const { username, password } = authCredentialsDto;
     const user = await this.repository.findOne({ where: { username } });
