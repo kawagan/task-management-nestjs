@@ -53,7 +53,7 @@ export class TasksController {
   updateTaskStatus(
     @Param('id') id: string,
     @Body() updateTaskStatusDto: UpdateTaskStatusDto,
-    @GetUser() user: User, // Pass the authenticated user
+    @GetUser() user: User, // Pass the authenticated user, only the owner can update
   ): Promise<Task> {
     return this.tasksService.updateTaskStatus(
       id,
