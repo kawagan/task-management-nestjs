@@ -19,6 +19,7 @@ export class Task {
 
   // eager: false means whenever we fetch a task, we do NOT fetch the user
   @ManyToOne(() => User, user => user.tasks, { eager: false })
+  //this is not enough to exclude the user we have used transform interceptor as well
   @Exclude({ toPlainOnly: true }) // Exclude the user field when transforming to plain object
   user: User;
 }
