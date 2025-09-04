@@ -19,6 +19,8 @@ import { UsersRepository } from './users.repository';
   ],
   providers: [AuthService, UsersRepository, JwtStrategy],
   controllers: [AuthController],
+  // when another module imports this module, they can use these providers too
+  // for example, TasksModule imports AuthModule, so it can use JwtStrategy
   exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}
