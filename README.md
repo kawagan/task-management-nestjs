@@ -1,98 +1,280 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Task Management API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A comprehensive REST API built with modern technologies for managing tasks with user authentication and authorization.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🛠 Technologies Used
 
-## Description
+### **Core Framework & Language**
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **NestJS** `^11.0.1` - Progressive Node.js framework for building scalable server-side applications
+- **TypeScript** `^5.7.3` - Strongly typed programming language that builds on JavaScript
+- **Node.js** - JavaScript runtime environment
 
-## Project setup
+### **Database & ORM**
 
-```bash
-$ npm install
+- **PostgreSQL** `^8.16.3` - Powerful, open-source relational database
+- **TypeORM** `^0.3.26` - Object-Relational Mapping (ORM) framework for TypeScript
+- **@nestjs/typeorm** `^11.0.0` - NestJS integration with TypeORM
+
+### **Authentication & Security**
+
+- **JWT (JSON Web Tokens)** `^11.0.0` - Secure token-based authentication
+- **Passport.js** `^0.7.0` - Authentication middleware for Node.js
+- **passport-jwt** `^4.0.1` - JWT authentication strategy for Passport
+- **bcryptjs** `^3.0.2` - Password hashing library with salt support
+
+### **Validation & Configuration**
+
+- **class-validator** `^0.14.2` - Decorator-based property validation
+- **class-transformer** `^0.5.1` - Transform objects to classes and vice versa
+- **@hapi/joi** `^17.1.1` - Object schema validation library
+- **@nestjs/config** `^4.0.2` - Configuration module for NestJS
+
+### **Development & Testing Tools**
+
+- **Jest** `^30.0.0` - JavaScript testing framework
+- **Supertest** `^7.0.0` - HTTP assertion library for testing APIs
+- **ESLint** `^9.18.0` - JavaScript/TypeScript linting utility
+- **Prettier** `^3.4.2` - Code formatting tool
+- **ts-jest** `^29.2.5` - TypeScript preprocessor for Jest
+
+### **Additional Utilities**
+
+- **UUID** `^11.1.0` - Universally unique identifier generation
+- **RxJS** `^7.8.1` - Reactive extensions for JavaScript
+- **Reflect Metadata** `^0.2.2` - Polyfill for metadata reflection API
+
+## 🏗 Project Architecture
+
+```
+src/
+├── auth/                           # Authentication Module
+│   ├── dto/                       # Data Transfer Objects
+│   │   └── auth-credentials.dto.ts
+│   ├── auth.controller.ts         # Auth endpoints (signup/signin)
+│   ├── auth.service.ts           # Auth business logic
+│   ├── auth.module.ts            # Auth module configuration
+│   ├── user.entity.ts            # User database entity
+│   ├── users.repository.ts       # User database operations
+│   ├── jwt.strategy.ts           # JWT Passport strategy
+│   ├── jwt-payload.interface.ts  # JWT payload type
+│   ├── auth-response.interface.ts# Auth response type
+│   └── get-user.decorator.ts     # Custom user decorator
+├── tasks/                         # Tasks Module
+│   ├── dto/                      # Data Transfer Objects
+│   │   ├── create-task.dto.ts
+│   │   ├── get-tasks-filter.dto.ts
+│   │   └── update-task-status.dto.ts
+│   ├── tasks.controller.ts       # Task CRUD endpoints
+│   ├── tasks.service.ts          # Task business logic
+│   ├── tasks.module.ts           # Tasks module configuration
+│   ├── task.entity.ts            # Task database entity
+│   ├── tasks.repository.ts       # Task database operations
+│   └── task-status.enum.ts       # Task status enumeration
+├── config.schema.ts               # Environment validation schema
+├── transform.interceptor.ts       # Response transformation
+├── app.module.ts                  # Root application module
+└── main.ts                        # Application entry point
 ```
 
-## Compile and run the project
+## ✨ Key Features
+
+- **JWT Authentication** - Secure login/signup with token-based auth
+- **Password Security** - Bcrypt hashing with salt
+- **Database Relations** - User-Task one-to-many relationship
+- **Input Validation** - DTO validation with class-validator
+- **Environment Config** - Joi schema validation for env variables
+- **Response Transformation** - Consistent API responses
+- **Error Handling** - Global exception filters
+- **Logging** - Built-in NestJS logger
+- **Testing** - Unit and E2E test configuration
+
+## 🚀 How to Run the Project
+
+### **Prerequisites**
+
+- Node.js (v16 or higher)
+- PostgreSQL database
+- npm or yarn package manager
+
+### **1. Clone the Repository**
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone <your-repo-url>
+cd task-management
 ```
 
-## Run tests
+### **2. Install Dependencies**
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
+### **3. Database Setup**
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Create a PostgreSQL database:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Using psql command line
+createdb taskmanagement
+
+# Or using PostgreSQL GUI tools like pgAdmin
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### **4. Environment Configuration**
 
-## Resources
+Create environment files for different stages:
 
-Check out a few resources that may come in handy when working with NestJS:
+**`.env.stage.dev`** (Development)
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```env
+STAGE=dev
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=your_db_username
+DB_PASSWORD=your_db_password
+DB_DATABASE=taskmanagement
+JWT_SECRET=your-super-secret-jwt-key-here
+```
 
-## Support
+**`.env.stage.prod`** (Production)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```env
+STAGE=prod
+DB_HOST=your_production_host
+DB_PORT=5432
+DB_USERNAME=your_prod_username
+DB_PASSWORD=your_prod_password
+DB_DATABASE=taskmanagement_prod
+JWT_SECRET=your-production-jwt-secret
+```
 
-## Stay in touch
+### **5. Run the Application**
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+**Development Mode** (with hot reload):
 
-## License
+```bash
+npm run start:dev
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+**Debug Mode**:
+
+```bash
+npm run start:debug
+```
+
+**Production Mode**:
+
+```bash
+npm run build
+npm run start:prod
+```
+
+The API will be available at: `http://localhost:3000`
+
+## 🧪 Testing
+
+```bash
+# Run unit tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run E2E tests
+npm run test:e2e
+
+# Generate test coverage report
+npm run test:cov
+
+# Debug tests
+npm run test:debug
+```
+
+## 🔧 Development Scripts
+
+```bash
+# Format code with Prettier
+npm run format
+
+# Lint code with ESLint
+npm run lint
+
+# Build the application
+npm run build
+
+# Start development server
+npm run start:dev
+```
+
+## 📡 API Endpoints
+
+### **Authentication**
+
+- `POST /auth/signup` - Register new user
+- `POST /auth/signin` - Login user
+
+### **Tasks** (Protected - Requires JWT Token)
+
+- `GET /tasks` - Get user's tasks (with filtering)
+- `GET /tasks/:id` - Get specific task
+- `POST /tasks` - Create new task
+- `PATCH /tasks/:id/status` - Update task status
+- `DELETE /tasks/:id` - Delete task
+
+### **Usage Example**
+
+```bash
+# Register user
+curl -X POST http://localhost:3000/auth/signup \
+  -H "Content-Type: application/json" \
+  -d '{"username": "testuser", "password": "TestPass123"}'
+
+# Login and get token
+curl -X POST http://localhost:3000/auth/signin \
+  -H "Content-Type: application/json" \
+  -d '{"username": "testuser", "password": "TestPass123"}'
+
+# Create task (use token from login response)
+curl -X POST http://localhost:3000/tasks \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -d '{"title": "Learn NestJS", "description": "Complete the tutorial"}'
+```
+
+## 🔒 Security Features
+
+- **JWT Authentication** - Stateless token-based authentication
+- **Password Hashing** - Bcrypt with salt for secure password storage
+- **Input Validation** - DTO validation prevents malicious input
+- **SQL Injection Protection** - TypeORM parameterized queries
+- **User Authorization** - Users can only access their own tasks
+- **Environment Variables** - Sensitive data stored in env files
+
+## 🌐 Environment Variables
+
+The application uses Joi validation to ensure all required environment variables are present:
+
+| Variable      | Description                       | Required | Default |
+| ------------- | --------------------------------- | -------- | ------- |
+| `STAGE`       | Application stage (dev/prod/test) | Yes      | -       |
+| `DB_HOST`     | PostgreSQL host                   | Yes      | -       |
+| `DB_PORT`     | PostgreSQL port                   | Yes      | 5432    |
+| `DB_USERNAME` | Database username                 | Yes      | -       |
+| `DB_PASSWORD` | Database password                 | Yes      | -       |
+| `DB_DATABASE` | Database name                     | Yes      | -       |
+| `JWT_SECRET`  | JWT signing secret                | Yes      | -       |
+
+## 📦 Production Deployment
+
+The application is production-ready and can be deployed to:
+
+- **Heroku** (with PostgreSQL addon)
+- **AWS** (EC2 + RDS)
+- **DigitalOcean** (App Platform + Managed Database)
+- **Docker** containers
+- **Any Node.js hosting platform**
+
+## 📄 License
+
+This project is licensed under UNLICENSED.
