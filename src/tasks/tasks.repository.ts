@@ -4,7 +4,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOneOptions, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 import { User } from '../auth/user.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
@@ -47,7 +47,7 @@ export class TasksRepository {
     return await this.repository.save(task);
   }
 
-  async findAll(options?: any): Promise<Task[]> {
+  async findAll(options?: FindManyOptions<Task>): Promise<Task[]> {
     return await this.repository.find(options);
   }
 
