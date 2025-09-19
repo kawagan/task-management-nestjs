@@ -4,7 +4,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 import { User } from '../auth/user.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
@@ -32,7 +32,7 @@ export class TasksRepository {
     return task;
   }
 
-  async findOne(options: any): Promise<Task | null> {
+  async findOne(options: FindOneOptions<Task>): Promise<Task | null> {
     return this.repository.findOne(options);
   }
 
