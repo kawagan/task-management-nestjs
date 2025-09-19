@@ -16,7 +16,7 @@ import { TasksModule } from './tasks/tasks.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => {
+      useFactory: (configService: ConfigService) => {
         return {
           type: 'postgres',
           host: configService.get('DB_HOST'),
